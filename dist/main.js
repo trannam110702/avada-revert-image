@@ -1,0 +1,1 @@
+import"./modulepreload-polyfill.js";window.chrome={tabs:{query:async()=>[{id:"dev-tab"}]},scripting:{executeScript:async({func:e,args:r})=>{try{e(...r)}catch(i){console.error("Error executing script:",i)}}}};console.log("Development environment initialized");
