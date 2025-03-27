@@ -1,0 +1,26 @@
+{
+  "name": "avada-revert-image",
+  "version": "1.0.0",
+  "description": "Revert origin version of image files in Shopify",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/trannam110702/avada-revert-image.git"
+  },
+  "author": "ethan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/trannam110702/avada-revert-image/issues"
+  },
+  "homepage": "https://github.com/trannam110702/avada-revert-image#readme",
+  "dependencies": {
+    "chrome-types": "^0.1.345",
+    "vite": "^5.4.1",
+    "vite-plugin-css-injected-by-js": "^3.5.1",
+    "vite-plugin-dts": "^4.0.3"
+  },
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
+}
