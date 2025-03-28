@@ -6,7 +6,8 @@
   "permissions": [
     "activeTab",
     "scripting",
-    "tabs"
+    "tabs",
+    "storage"
   ],
   "host_permissions": [
     "https://admin.shopify.com/*",
@@ -18,5 +19,11 @@
   },
   "action": {
     "default_popup": "popup.html"
-  }
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://admin.shopify.com/*", "http://localhost:5173/*"],
+      "js": ["contentScript.js"]
+    }
+  ]
 }

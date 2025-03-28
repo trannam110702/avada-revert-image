@@ -8,6 +8,9 @@
     "build": "vite build",
     "preview": "vite preview"
   },
+  "dependencies": {
+    "preact": "^10.3.2"
+  },
   "devDependencies": {
     "vite": "^5.0.0",
     "vite-plugin-static-copy": "^1.0.0",

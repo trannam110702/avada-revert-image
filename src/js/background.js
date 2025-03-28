@@ -1,30 +1,71 @@
-// Listen for tab updates
+// Original tab update listener code
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-  // Check if the page has completed loading
   if (changeInfo.status === "complete" && tab.url) {
-    // Example: Run script on specific URLs
-    // You can modify these patterns to match your needs
     const urlPatterns = [
       "https://admin.shopify.com/*",
       "http://localhost:5173/*",
     ];
 
-    // Check if the current URL matches any pattern
     if (
       urlPatterns.some((pattern) => {
-        // Convert URL pattern to regex
         const regex = new RegExp("^" + pattern.replace(/\*/g, ".*") + "$");
         return regex.test(tab.url);
       })
     ) {
-      // Inject your script
       chrome.scripting.executeScript({
         target: { tabId: tabId },
         func: () => {
-          // Your code to run on matching pages
-          console.log("Script injected on:", window.location.href);
-          // Example: Change background color
-          document.body.style.background = "#f0f0f0";
+          console.log("Create a fetch observer");
+          const originalFetch = window.fetch;
+          window.fetch = async function (...args) {
+            const [url, config] = args;
+
+            if (
+              url.includes("api/shopify/nam-product-store") &&
+              url.includes("operation=FilesQuery") &&
+              url.includes("type=query") &&
+              config?.body?.includes("media_type:Image")
+            ) {
+              try {
+                const response = await originalFetch(...args);
+                const requestClone = args[1] ? { ...args[1] } : {};
+
+                // Clean up the config object to make it clonable
+                const cleanConfig = {
+                  method: requestClone.method,
+                  headers: requestClone.headers
+                    ? { ...requestClone.headers }
+                    : {},
+                  body: requestClone.body,
+                  mode: requestClone.mode,
+                  credentials: requestClone.credentials,
+                  cache: requestClone.cache,
+                  redirect: requestClone.redirect,
+                  referrer: requestClone.referrer,
+                  referrerPolicy: requestClone.referrerPolicy,
+                };
+
+                // Send message using postMessage
+                window.postMessage(
+                  {
+                    type: "AVADA_INTERCEPTED_REQUEST",
+                    data: {
+                      url: args[0],
+                      config: cleanConfig,
+                    },
+                  },
+                  "*"
+                );
+
+                return response;
+              } catch (error) {
+                console.error("Error intercepting request:", error);
+                throw error;
+              }
+            }
+
+            return originalFetch(...args);
+          };
         },
         world: "MAIN",
       });
