@@ -5,21 +5,27 @@ import * as path from "path";
 export default defineConfig(({ command, mode, isSsrBuild, isPreview }) => {
   const buildInput = {
     main: path.resolve(__dirname, "src/js/main.js"),
-    popup: path.resolve(__dirname, "src/static/popup.html"),
-    index: path.resolve(__dirname, "src/static/index.html"),
+    background: path.resolve(__dirname, "src/js/background.js"),
+    popup: path.resolve(__dirname, "src/popup.html"),
+    index: path.resolve(__dirname, "src/index.html"),
   };
 
   return {
-    root: "src/static",
+    root: "src",
     build: {
-      outDir: "../../dist",
+      outDir: "../dist",
       emptyOutDir: true,
       rollupOptions: {
         input: buildInput,
         output: {
-          entryFileNames: "[name]-[hash].js",
+          entryFileNames: (chunkInfo) => {
+            if (chunkInfo.name === "background") {
+              return "background.js";
+            }
+            return "assets/[name]-[hash].js";
+          },
           chunkFileNames: "chunk-[hash].js",
-          assetFileNames: "[name]-[hash].[ext]",
+          assetFileNames: "[name].[ext]",
         },
       },
     },
