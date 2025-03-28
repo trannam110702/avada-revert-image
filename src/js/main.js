@@ -1,4 +1,6 @@
-// Mock chrome API for development
+import "@js/background.js";
+import "@js/popup.js";
+
 window.chrome = {
   tabs: {
     query: async () => [{ id: "dev-tab" }],
@@ -13,6 +15,3 @@ window.chrome = {
     },
   },
 };
-
-// Initialize development environment
-console.log("Development environment initialized");

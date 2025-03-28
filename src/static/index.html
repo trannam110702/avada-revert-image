@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JS Injector Development</title>
+    <title>Avada revert image Development</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -12,17 +12,16 @@
             padding: 20px;
         }
         .container {
-            display: flex;
+            /* display: flex; */
             gap: 20px;
         }
         .preview {
-            flex: 1;
             padding: 20px;
             border: 1px solid #ccc;
             border-radius: 4px;
         }
         iframe {
-            width: 300px;
+            width: 600px;
             height: 400px;
             border: 1px solid #ccc;
             border-radius: 4px;
@@ -30,19 +29,12 @@
     </style>
 </head>
 <body>
-    <h1>JS Injector Development Page</h1>
+    <h1>Avada Revert Image Development Page</h1>
     <div class="container">
         <div class="preview">
             <h2>Extension Preview</h2>
-            <iframe src="./popup.html"></iframe>
-        </div>
-        <div class="preview">
-            <h2>Test Area</h2>
-            <div id="testArea">
-                <p>This area will be used to test your injected JavaScript</p>
-            </div>
+            <iframe src="popup.html"></iframe>
         </div>
     </div>
-    <script type="module" src="./main.js"></script>
 </body>
 </html> 

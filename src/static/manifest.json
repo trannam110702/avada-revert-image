@@ -5,8 +5,17 @@
   "manifest_version": 3,
   "permissions": [
     "activeTab",
-    "scripting"
+    "scripting",
+    "tabs"
   ],
+  "host_permissions": [
+    "https://admin.shopify.com/*",
+    "http://localhost:5173/*"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
   "action": {
     "default_popup": "popup.html"
   }
