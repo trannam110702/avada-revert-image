@@ -7,11 +7,14 @@
     "activeTab",
     "scripting",
     "tabs",
-    "storage"
+    "storage",
+    "webRequest",
+    "webRequestBlocking"
   ],
   "host_permissions": [
     "https://admin.shopify.com/*",
-    "http://localhost:5173/*"
+    "http://localhost:5173/*",
+    "<all_urls>"
   ],
   "background": {
     "service_worker": "background.js",
