@@ -1,5 +1,6 @@
 import { defineConfig, transformWithEsbuild } from "vite";
 import { viteStaticCopy } from "vite-plugin-static-copy";
+import tailwindcss from "@tailwindcss/vite";
 import * as path from "path";
 
 export default defineConfig(({ command, mode, isSsrBuild, isPreview }) => {
@@ -47,6 +48,7 @@ export default defineConfig(({ command, mode, isSsrBuild, isPreview }) => {
     resolve: {
       alias: {
         "@js": path.resolve(__dirname, "./src/js"),
+        "@helpers": path.resolve(__dirname, "./src/helpers"),
         react: "preact/compat",
         "react-dom": "preact/compat",
       },
@@ -71,6 +73,7 @@ export default defineConfig(({ command, mode, isSsrBuild, isPreview }) => {
           });
         },
       },
+      tailwindcss(),
     ],
   };
 });
